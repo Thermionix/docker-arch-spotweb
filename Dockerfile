@@ -27,7 +27,8 @@ RUN		chmod +x /opt/create-mysql-structure.sh
 ADD		nginx.conf /etc/nginx/nginx.conf
 ADD		spotweb.conf /etc/nginx/sites-enabled/spotweb.conf
 
-ADD 	spotweb.crond /etc/cron.hourly/spotweb
+RUN		echo -e '!stdout(true)\n0 */2 * * * cd /srv/http/spotweb && /usr/bin/php retrieve.php' | fcrontab -
+
 ADD 	mariadb.ini /etc/supervisor.d/mariadb.ini
 ADD 	nginx.ini /etc/supervisor.d/nginx.ini
 ADD 	php-fpm.ini /etc/supervisor.d/php-fpm.ini
