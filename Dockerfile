@@ -3,7 +3,7 @@ MAINTAINER thermionix
 
 RUN		pacman -Sy --noconfirm
 RUN		pacman-key --refresh-keys
-RUN		pacman -S --needed supervisor git mariadb nginx php-fpm php-gd cronie --noconfirm
+RUN		pacman -S --needed supervisor git mariadb nginx php-fpm php-gd fcron --noconfirm
 RUN		pacman -Scc --noconfirm
 
 RUN		sed -i 's,;extension=pdo_mysql.so,extension=pdo_mysql.so,g' /etc/php/php.ini
@@ -27,7 +27,7 @@ RUN		chmod +x /opt/create-mysql-structure.sh
 ADD		nginx.conf /etc/nginx/nginx.conf
 ADD		spotweb.conf /etc/nginx/sites-enabled/spotweb.conf
 
-ADD 	spotweb.crond /etc/cron.d/spotweb
+ADD 	spotweb.crond /etc/cron.hourly/spotweb
 ADD 	mariadb.ini /etc/supervisor.d/mariadb.ini
 ADD 	nginx.ini /etc/supervisor.d/nginx.ini
 ADD 	php-fpm.ini /etc/supervisor.d/php-fpm.ini
