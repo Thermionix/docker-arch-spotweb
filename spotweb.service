@@ -1,0 +1,12 @@
+[Unit]
+Description=spotweb container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a spotweb
+ExecStop=/usr/bin/docker stop spotweb
+
+[Install]
+WantedBy=local.target
