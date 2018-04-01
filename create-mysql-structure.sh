@@ -7,7 +7,7 @@ su - mysql -s /bin/bash -c '/usr/bin/mysqld --pid-file=/run/mysqld/mysqld.pid --
 sleep 10
 mysql -uroot -e "CREATE USER spotweb@localhost IDENTIFIED BY 'spotweb'; CREATE DATABASE spotweb; GRANT ALL PRIVILEGES ON spotweb.* TO spotweb@localhost IDENTIFIED BY 'spotweb'; FLUSH PRIVILEGES; "
 sleep 2
-killall mysqld
-sleep 5
+#killall mysqld
+#sleep 5
 
 

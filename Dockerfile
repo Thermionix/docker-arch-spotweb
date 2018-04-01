@@ -2,24 +2,24 @@ FROM base/archlinux
 MAINTAINER thermionix
 
 RUN		pacman -Sy --noconfirm
-RUN		pacman-key --refresh-keys
 RUN		pacman -S --needed supervisor git mariadb nginx php-fpm php-gd fcron --noconfirm
 RUN		pacman -Scc --noconfirm
 
-RUN		sed -i 's,;extension=pdo_mysql.so,extension=pdo_mysql.so,g' /etc/php/php.ini
-RUN 	sed -i 's,;extension=mysql.so,extension=mysql.so,g' /etc/php/php.ini
-RUN		sed -i 's,;extension=gd.so,extension=gd.so,g' /etc/php/php.ini
-RUN		sed -i 's,;extension=zip.so,extension=zip.so,g' /etc/php/php.ini
+RUN		sed -i 's,;extension=pdo_mysql,extension=pdo_mysql,g' /etc/php/php.ini
+RUN 	sed -i 's,;extension=mysql,extension=mysql,g' /etc/php/php.ini
+RUN 	sed -i 's,;extension=gettext,extension=gettext,g' /etc/php/php.ini
+RUN		sed -i 's,;extension=gd,extension=gd,g' /etc/php/php.ini
+RUN		sed -i 's,;extension=zip,extension=zip,g' /etc/php/php.ini
 RUN		sed -i 's,;extension=openssl.so,extension=openssl.so,g' /etc/php/php.ini
-RUN		sed -i "s,;date.timezone =.*,date.timezone = Australia/Melbourne,g" /etc/php/php.ini
+RUN		sed -i "s,;date.timezone =.*,date.timezone = Australia/Brisbane,g" /etc/php/php.ini
 RUN		sed -i "s,memory_limit = 128M,memory_limit = 512M,g" /etc/php/php.ini
 
 RUN		git clone https://github.com/spotweb/spotweb.git /srv/http/spotweb
 RUN		mkdir /srv/http/spotweb/cache
 RUN		chmod 777 /srv/http/spotweb/cache
 
-ADD		dbsettings.inc.php /srv/http/spotweb/dbsettings.inc.php
-RUN		chown -R http:http /srv/http
+#ADD		dbsettings.inc.php /srv/http/spotweb/dbsettings.inc.php
+#RUN		chown -R http:http /srv/http
 
 ADD		./create-mysql-structure.sh /opt/create-mysql-structure.sh
 RUN		chmod +x /opt/create-mysql-structure.sh
