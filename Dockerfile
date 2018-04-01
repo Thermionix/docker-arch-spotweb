@@ -18,8 +18,8 @@ RUN		git clone https://github.com/spotweb/spotweb.git /srv/http/spotweb
 RUN		mkdir /srv/http/spotweb/cache
 RUN		chmod 777 /srv/http/spotweb/cache
 
-#ADD		dbsettings.inc.php /srv/http/spotweb/dbsettings.inc.php
-#RUN		chown -R http:http /srv/http
+ADD		dbsettings.inc.php /srv/http/spotweb/dbsettings.inc.php
+RUN		chown -R http:http /srv/http
 
 ADD		./create-mysql-structure.sh /opt/create-mysql-structure.sh
 RUN		chmod +x /opt/create-mysql-structure.sh
